@@ -103,25 +103,6 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
         }
-        .status {
-            margin: 20px 0;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .countdown {
-            font-size: 18px;
-            color: #667eea;
-            margin: 10px 0;
-        }
-        .warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
     </style>
 </head>
 <body>
@@ -136,40 +117,27 @@
             <p><strong>Email:</strong> alessandro.gaspari@gmail.com</p>
         </div>
         
-        <div class="warning">
-            ⚠️ <strong>Nota:</strong> Se appare una pagina di avviso di ngrok, clicca su "Visit Site" o attendi il reindirizzamento automatico.
-        </div>
-        
-        <div class="status" id="status">
-            🔄 Preparazione accesso in corso...
-        </div>
-        
-        <div class="countdown" id="countdown"></div>
-        
-        <a href="https://8945c1012ed0.ngrok-free.app" class="access-button" id="accessBtn" target="_blank">
+        <a href="https://b826e07f81ac.ngrok-free.app" class="access-button" target="_blank">
             🚀 Accedi all'Applicazione
         </a>
         
-        <div class="url-display" id="urlDisplay">https://8945c1012ed0.ngrok-free.app</div>
+        <div class="url-display">https://b826e07f81ac.ngrok-free.app</div>
         
         <button class="copy-button" onclick="copyUrl()">📋 Copia URL</button>
         
         <div class="info-section">
             <h3>📋 Informazioni Applicazione</h3>
             <p><strong>Versione:</strong> 2.0</p>
-            <p><strong>Ultimo aggiornamento:</strong> 18/08/2025, 22:54:52</p>
+            <p><strong>Ultimo aggiornamento:</strong> 18/08/2025, 23:00:03</p>
             <p><strong>Stato:</strong> Attivo</p>
             <p><strong>Porta:</strong> 3000</p>
         </div>
     </div>
 
     <script>
-        const ngrokUrl = 'https://8945c1012ed0.ngrok-free.app';
-        let countdown = 3;
-        
-        // Funzione per copiare URL
         function copyUrl() {
-            navigator.clipboard.writeText(ngrokUrl).then(() => {
+            const url = 'https://b826e07f81ac.ngrok-free.app';
+            navigator.clipboard.writeText(url).then(() => {
                 const btn = event.target;
                 const originalText = btn.textContent;
                 btn.textContent = '✅ Copiato!';
@@ -180,123 +148,6 @@
                 }, 2000);
             });
         }
-        
-        // Preload dell'URL
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = ngrokUrl;
-        link.as = 'document';
-        document.head.appendChild(link);
-        
-        // Countdown e reindirizzamento automatico
-        function updateCountdown() {
-            const countdownEl = document.getElementById('countdown');
-            const statusEl = document.getElementById('status');
-            
-            if (countdown > 0) {
-                countdownEl.textContent = `⏱️ Reindirizzamento automatico tra ${countdown} secondi...`;
-                countdown--;
-                setTimeout(updateCountdown, 1000);
-            } else {
-                countdownEl.textContent = '🔄 Reindirizzamento in corso...';
-                statusEl.textContent = '✅ Accesso in corso...';
-                statusEl.style.background = '#d4edda';
-                statusEl.style.color = '#155724';
-                
-                // Strategia multipla di reindirizzamento
-                redirectToApp();
-            }
-        }
-        
-        function redirectToApp() {
-            // Strategia 1: Apri in una nuova finestra con User-Agent personalizzato
-            const newWindow = window.open('', '_blank');
-            if (newWindow) {
-                // Imposta User-Agent personalizzato tramite fetch
-                fetch(ngrokUrl, {
-                    method: 'GET',
-                    headers: {
-                        'ngrok-skip-browser-warning': 'true',
-                        'User-Agent': 'AppFerie-Custom-Browser/1.0'
-                    }
-                }).then(() => {
-                    newWindow.location.href = ngrokUrl;
-                }).catch(() => {
-                    // Fallback: reindirizzamento normale
-                    newWindow.location.href = ngrokUrl;
-                });
-            }
-            
-            // Strategia 2: Reindirizzamento della finestra corrente dopo 2 secondi
-            setTimeout(() => {
-                try {
-                    // Prova a impostare header personalizzato
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('GET', ngrokUrl, true);
-                    xhr.setRequestHeader('ngrok-skip-browser-warning', 'true');
-                    xhr.setRequestHeader('User-Agent', 'AppFerie-Custom-Browser/1.0');
-                    xhr.onload = function() {
-                        window.location.href = ngrokUrl;
-                    };
-                    xhr.onerror = function() {
-                        window.location.href = ngrokUrl;
-                    };
-                    xhr.send();
-                } catch (e) {
-                    // Fallback finale
-                    window.location.href = ngrokUrl;
-                }
-            }, 2000);
-        }
-        
-        // Auto-detection e clic del pulsante "Visit Site" su pagine ngrok
-        function autoClickVisitSite() {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList') {
-                        // Cerca il pulsante "Visit Site" di ngrok
-                        const visitButton = document.querySelector('button[data-testid="visit-site"], .visit-site, button:contains("Visit Site"), a:contains("Visit Site")');
-                        if (visitButton) {
-                            console.log('Pulsante Visit Site trovato, clic automatico...');
-                            visitButton.click();
-                            observer.disconnect();
-                        }
-                        
-                        // Cerca anche link con testo "Visit Site"
-                        const links = document.querySelectorAll('a, button');
-                        links.forEach(link => {
-                            if (link.textContent.includes('Visit Site') || link.textContent.includes('visit site')) {
-                                console.log('Link Visit Site trovato, clic automatico...');
-                                link.click();
-                                observer.disconnect();
-                            }
-                        });
-                    }
-                });
-            });
-            
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-            
-            // Disconnetti l'observer dopo 10 secondi per evitare loop infiniti
-            setTimeout(() => observer.disconnect(), 10000);
-        }
-        
-        // Avvia il countdown
-        updateCountdown();
-        
-        // Avvia l'auto-detection
-        autoClickVisitSite();
-        
-        // Gestione errori di rete
-        window.addEventListener('error', (e) => {
-            console.log('Errore rilevato:', e);
-            document.getElementById('status').textContent = '⚠️ Errore di connessione. Prova il link manuale.';
-            document.getElementById('status').style.background = '#f8d7da';
-            document.getElementById('status').style.color = '#721c24';
-        });
     </script>
 </body>
 </html>
