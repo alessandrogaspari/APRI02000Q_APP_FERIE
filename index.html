@@ -3,275 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppFerie - Reindirizzamento Automatico</title>
-    <meta http-equiv="refresh" content="3;url=https://2fd3981dcbd0.ngrok-free.app?ngrok-skip-browser-warning=true">
+    <title>AppFerie - Accesso Applicazione</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            margin: 0;
+            padding: 20px;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
         }
-        
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: white;
+            border-radius: 15px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
             max-width: 500px;
             width: 100%;
         }
-        
         .logo {
             width: 80px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
-            margin: 0 auto 30px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
             font-size: 24px;
             font-weight: bold;
         }
-        
         h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .subtitle {
-            font-size: 18px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 30px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .countdown {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .manual-link {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            background: white;
             color: #333;
-            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .access-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
             border-radius: 25px;
+            font-size: 18px;
             font-weight: bold;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .access-button:hover {
+            transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        
-        .manual-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.2s;
         }
-        
-        .info-box {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        .copy-button:hover {
+            background: #218838;
+        }
+        .url-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            word-break: break-all;
+            font-size: 14px;
+        }
+        .info-section {
+            background: #e3f2fd;
+            border-radius: 8px;
             padding: 20px;
-            margin-top: 30px;
+            margin: 20px 0;
             text-align: left;
         }
-        
-        .info-box h3 {
-            margin-bottom: 15px;
-            color: #fff;
-        }
-        
-        .info-box p {
-            margin-bottom: 10px;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-        
         .developer-info {
-            margin-top: 30px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        .developer-info a {
-            color: #fff;
-            text-decoration: none;
-        }
-        
-        .developer-info a:hover {
-            text-decoration: underline;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
+            background: #f0f8ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
             margin: 20px 0;
-            overflow: hidden;
+            border-radius: 0 8px 8px 0;
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: white;
-            width: 0%;
-            animation: progress 3s linear forwards;
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
         }
-        
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
+        .countdown {
+            font-size: 18px;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">🚀</div>
+        <div class="logo">AF</div>
         <h1>AppFerie</h1>
-        <p class="subtitle">Reindirizzamento automatico in corso...</p>
-        
-        <div class="spinner"></div>
-        
-        <div class="countdown" id="countdown">3</div>
-        
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        
-        <p>Verrai reindirizzato automaticamente all'applicazione</p>
-        
-        <a href="https://2fd3981dcbd0.ngrok-free.app?ngrok-skip-browser-warning=true" class="manual-link" target="_blank" id="manualLink">
-            🔗 Accedi Manualmente
-        </a>
-        
-        <div class="info-box">
-            <h3>ℹ️ Informazioni</h3>
-            <p><strong>URL Attuale:</strong> https://2fd3981dcbd0.ngrok-free.app</p>
-            <p><strong>Stato:</strong> ✅ Online e Accessibile</p>
-            <p><strong>Bypass:</strong> Reindirizzamento automatico attivo</p>
-        </div>
+        <p class="subtitle">Sistema di Gestione Ferie - IPSIA Apri</p>
         
         <div class="developer-info">
+            <h3>👨‍💻 Informazioni Sviluppatore</h3>
             <p><strong>Sviluppatore:</strong> Alessandro Gaspari</p>
-            <p><strong>Email:</strong> <a href="mailto:alessandro.gaspari@gmail.com">alessandro.gaspari@gmail.com</a></p>
-            <p><strong>Ultimo aggiornamento:</strong> 18/08/2025, 21:57:59</p>
+            <p><strong>Email:</strong> alessandro.gaspari@gmail.com</p>
+        </div>
+        
+        <div class="warning">
+            ⚠️ <strong>Nota:</strong> Se appare una pagina di avviso di ngrok, clicca su "Visit Site" o attendi il reindirizzamento automatico.
+        </div>
+        
+        <div class="status" id="status">
+            🔄 Preparazione accesso in corso...
+        </div>
+        
+        <div class="countdown" id="countdown"></div>
+        
+        <a href="https://c93b16ccc59e.ngrok-free.app" class="access-button" id="accessBtn" target="_blank">
+            🚀 Accedi all'Applicazione
+        </a>
+        
+        <div class="url-display" id="urlDisplay">https://c93b16ccc59e.ngrok-free.app</div>
+        
+        <button class="copy-button" onclick="copyUrl()">📋 Copia URL</button>
+        
+        <div class="info-section">
+            <h3>📋 Informazioni Applicazione</h3>
+            <p><strong>Versione:</strong> 2.0</p>
+            <p><strong>Ultimo aggiornamento:</strong> 18/08/2025, 22:15:01</p>
+            <p><strong>Stato:</strong> Attivo</p>
+            <p><strong>Porta:</strong> 3000</p>
         </div>
     </div>
 
     <script>
-        // Countdown e reindirizzamento automatico
+        const ngrokUrl = 'https://c93b16ccc59e.ngrok-free.app';
         let countdown = 3;
-        const countdownElement = document.getElementById('countdown');
-        const manualLink = document.getElementById('manualLink');
         
-        // Aggiorna il countdown ogni secondo
-        const countdownInterval = setInterval(() => {
-            countdown--;
-            countdownElement.textContent = countdown;
-            
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                countdownElement.textContent = 'Reindirizzamento...';
-                redirect();
-            }
-        }, 1000);
+        // Funzione per copiare URL
+        function copyUrl() {
+            navigator.clipboard.writeText(ngrokUrl).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copiato!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#28a745';
+                }, 2000);
+            });
+        }
         
-        // Funzione di reindirizzamento con multiple strategie
-        function redirect() {
-            const targetUrl = 'https://2fd3981dcbd0.ngrok-free.app?ngrok-skip-browser-warning=true';
+        // Preload dell'URL
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = ngrokUrl;
+        link.as = 'document';
+        document.head.appendChild(link);
+        
+        // Countdown e reindirizzamento automatico
+        function updateCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            const statusEl = document.getElementById('status');
             
-            // Strategia 1: Reindirizzamento diretto
-            try {
-                window.location.href = targetUrl;
-            } catch (e) {
-                console.log('Strategia 1 fallita, provo strategia 2');
+            if (countdown > 0) {
+                countdownEl.textContent = `⏱️ Reindirizzamento automatico tra ${countdown} secondi...`;
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownEl.textContent = '🔄 Reindirizzamento in corso...';
+                statusEl.textContent = '✅ Accesso in corso...';
+                statusEl.style.background = '#d4edda';
+                statusEl.style.color = '#155724';
+                
+                // Strategia multipla di reindirizzamento
+                redirectToApp();
+            }
+        }
+        
+        function redirectToApp() {
+            // Strategia 1: Apri in una nuova finestra con User-Agent personalizzato
+            const newWindow = window.open('', '_blank');
+            if (newWindow) {
+                // Imposta User-Agent personalizzato tramite fetch
+                fetch(ngrokUrl, {
+                    method: 'GET',
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true',
+                        'User-Agent': 'AppFerie-Custom-Browser/1.0'
+                    }
+                }).then(() => {
+                    newWindow.location.href = ngrokUrl;
+                }).catch(() => {
+                    // Fallback: reindirizzamento normale
+                    newWindow.location.href = ngrokUrl;
+                });
             }
             
-            // Strategia 2: Apertura in nuova finestra (backup)
+            // Strategia 2: Reindirizzamento della finestra corrente dopo 2 secondi
             setTimeout(() => {
                 try {
-                    const newWindow = window.open(targetUrl, '_blank');
-                    if (!newWindow) {
-                        // Se il popup è bloccato, mostra il link manuale
-                        manualLink.style.background = '#ff4757';
-                        manualLink.textContent = '⚠️ Clicca qui per accedere';
-                    }
+                    // Prova a impostare header personalizzato
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', ngrokUrl, true);
+                    xhr.setRequestHeader('ngrok-skip-browser-warning', 'true');
+                    xhr.setRequestHeader('User-Agent', 'AppFerie-Custom-Browser/1.0');
+                    xhr.onload = function() {
+                        window.location.href = ngrokUrl;
+                    };
+                    xhr.onerror = function() {
+                        window.location.href = ngrokUrl;
+                    };
+                    xhr.send();
                 } catch (e) {
-                    console.log('Strategia 2 fallita');
+                    // Fallback finale
+                    window.location.href = ngrokUrl;
                 }
-            }, 1000);
+            }, 2000);
         }
         
-        // Reindirizzamento immediato se non siamo su ngrok
-        if (!window.location.hostname.includes('ngrok')) {
-            // Se siamo già sulla pagina GitHub, reindirizza immediatamente
-            setTimeout(() => {
-                redirect();
-            }, 500);
-        }
-        
-        // Gestione click manuale
-        manualLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            redirect();
-        });
-        
-        // Auto-click se rileva pagina di avviso ngrok
-        document.addEventListener('DOMContentLoaded', function() {
-            // Controlla se siamo su una pagina di avviso ngrok
-            if (document.body.innerHTML.includes('Visit Site') || 
-                document.body.innerHTML.includes('ngrok-free.app')) {
-                
-                // Trova e clicca automaticamente il pulsante "Visit Site"
-                setTimeout(() => {
-                    const visitButton = document.querySelector('button') || 
-                                      document.querySelector('a[href*="visit"]') ||
-                                      document.querySelector('.btn, .button');
-                    
-                    if (visitButton && visitButton.textContent.includes('Visit')) {
-                        visitButton.click();
+        // Auto-detection e clic del pulsante "Visit Site" su pagine ngrok
+        function autoClickVisitSite() {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        // Cerca il pulsante "Visit Site" di ngrok
+                        const visitButton = document.querySelector('button[data-testid="visit-site"], .visit-site, button:contains("Visit Site"), a:contains("Visit Site")');
+                        if (visitButton) {
+                            console.log('Pulsante Visit Site trovato, clic automatico...');
+                            visitButton.click();
+                            observer.disconnect();
+                        }
+                        
+                        // Cerca anche link con testo "Visit Site"
+                        const links = document.querySelectorAll('a, button');
+                        links.forEach(link => {
+                            if (link.textContent.includes('Visit Site') || link.textContent.includes('visit site')) {
+                                console.log('Link Visit Site trovato, clic automatico...');
+                                link.click();
+                                observer.disconnect();
+                            }
+                        });
                     }
-                }, 1000);
-            }
-        });
+                });
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            // Disconnetti l'observer dopo 10 secondi per evitare loop infiniti
+            setTimeout(() => observer.disconnect(), 10000);
+        }
         
-        // Preload dell'URL di destinazione
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = 'https://2fd3981dcbd0.ngrok-free.app?ngrok-skip-browser-warning=true';
-        document.head.appendChild(link);
+        // Avvia il countdown
+        updateCountdown();
+        
+        // Avvia l'auto-detection
+        autoClickVisitSite();
+        
+        // Gestione errori di rete
+        window.addEventListener('error', (e) => {
+            console.log('Errore rilevato:', e);
+            document.getElementById('status').textContent = '⚠️ Errore di connessione. Prova il link manuale.';
+            document.getElementById('status').style.background = '#f8d7da';
+            document.getElementById('status').style.color = '#721c24';
+        });
     </script>
 </body>
 </html>
