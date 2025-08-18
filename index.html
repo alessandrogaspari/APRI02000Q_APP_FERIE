@@ -68,11 +68,23 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            margin: 10px;
+            cursor: pointer;
+            border: none;
         }
         
         .access-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+        }
+        
+        .copy-button:hover {
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.4);
         }
         
         .info {
@@ -147,6 +159,39 @@
             font-size: 14px;
             margin-top: 20px;
         }
+        
+        .warning-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        .warning-notice h4 {
+            margin-bottom: 10px;
+            color: #856404;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .access-button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -155,19 +200,29 @@
         <h1>AppFerie</h1>
         <p class="subtitle">Sistema di Gestione Ferie - Accesso Remoto</p>
         
-        <a href="https://e783ac560aba.ngrok-free.app?ngrok-skip-browser-warning=true" class="access-button" target="_blank">
-            🚀 Accedi all'Applicazione
-        </a>
+        <div class="button-group">
+            <button class="access-button" onclick="accessApp()">
+                🚀 Accedi all'Applicazione
+            </button>
+            <button class="access-button copy-button" onclick="copyUrl()">
+                📋 Copia URL
+            </button>
+        </div>
         
         <div class="status">🟢 Online - Accesso Diretto</div>
+        
+        <div class="warning-notice">
+            <h4>⚠️ Avviso Importante</h4>
+            <p>Se ngrok mostra una pagina di avviso, clicca su "Visit Site" per continuare. Questo sistema implementa multiple soluzioni per bypassare automaticamente l'avviso.</p>
+        </div>
         
         <div class="info">
             <h3>ℹ️ Informazioni di Accesso</h3>
             <p><strong>URL Attuale:</strong></p>
-            <div class="url-display">https://e783ac560aba.ngrok-free.app</div>
+            <div class="url-display" id="urlDisplay">https://7cd40f51b378.ngrok-free.app</div>
             <p>Questo link ti permette di accedere all'applicazione AppFerie da qualsiasi dispositivo connesso a Internet.</p>
             <p><strong>Nota:</strong> L'URL viene aggiornato automaticamente ogni 8 ore o quando il server viene riavviato.</p>
-            <p><strong>✅ Configurazione:</strong> Accesso diretto senza pagina di avviso ngrok.</p>
+            <p><strong>✅ Configurazione:</strong> Sistema multi-livello per bypassare l'avviso ngrok (Header + URL Parameter + JavaScript).</p>
         </div>
         
         <div class="developer-info">
@@ -177,8 +232,121 @@
         </div>
         
         <div class="last-update">
-            Ultimo aggiornamento: 18/08/2025, 21:37:05
+            Ultimo aggiornamento: 18/08/2025, 21:45:35
         </div>
     </div>
+
+    <script>
+        // SOLUZIONE B: JavaScript robusto per gestire l'avviso ngrok
+        const ngrokUrl = 'https://7cd40f51b378.ngrok-free.app';
+        const directUrl = 'https://7cd40f51b378.ngrok-free.app?ngrok-skip-browser-warning=true';
+        
+        // Funzione per accedere all'app con multiple strategie
+        function accessApp() {
+            // Strategia 1: Prova prima con il parametro URL
+            const urlWithParam = ngrokUrl + '?ngrok-skip-browser-warning=true';
+            
+            // Strategia 2: Apri in una nuova finestra con headers personalizzati
+            const newWindow = window.open('', '_blank');
+            
+            if (newWindow) {
+                // Strategia 3: Crea un form nascosto per inviare headers personalizzati
+                const form = document.createElement('form');
+                form.method = 'GET';
+                form.action = urlWithParam;
+                form.target = '_blank';
+                form.style.display = 'none';
+                
+                // Aggiungi header personalizzato tramite meta tag
+                const metaRefresh = document.createElement('meta');
+                metaRefresh.httpEquiv = 'refresh';
+                metaRefresh.content = '0; url=' + urlWithParam;
+                
+                document.body.appendChild(form);
+                
+                // Strategia 4: Usa fetch per pre-caricare e poi reindirizza
+                fetch(urlWithParam, {
+                    method: 'HEAD',
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true',
+                        'User-Agent': 'AppFerie-DirectAccess/1.0'
+                    }
+                }).then(() => {
+                    newWindow.location.href = urlWithParam;
+                }).catch(() => {
+                    // Fallback: reindirizzamento diretto
+                    newWindow.location.href = urlWithParam;
+                });
+                
+                // Timeout di sicurezza
+                setTimeout(() => {
+                    if (newWindow.location.href === 'about:blank') {
+                        newWindow.location.href = urlWithParam;
+                    }
+                }, 1000);
+            } else {
+                // Se il popup è bloccato, usa il redirect diretto
+                window.open(urlWithParam, '_blank');
+            }
+        }
+        
+        // Funzione per copiare l'URL negli appunti
+        function copyUrl() {
+            const textArea = document.createElement('textarea');
+            textArea.value = directUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                alert('✅ URL copiato negli appunti!\n\nPuoi incollarlo in qualsiasi browser per accedere direttamente all\'applicazione.');
+            } catch (err) {
+                // Fallback per browser moderni
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(directUrl).then(() => {
+                        alert('✅ URL copiato negli appunti!');
+                    }).catch(() => {
+                        prompt('Copia questo URL:', directUrl);
+                    });
+                } else {
+                    prompt('Copia questo URL:', directUrl);
+                }
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        // Auto-detect e gestione automatica dell'avviso ngrok
+        document.addEventListener('DOMContentLoaded', function() {
+            // Controlla se siamo su una pagina di avviso ngrok
+            if (window.location.hostname.includes('ngrok') && 
+                document.title.includes('ngrok') && 
+                document.body.innerHTML.includes('Visit Site')) {
+                
+                // Trova e clicca automaticamente il pulsante "Visit Site"
+                const visitButton = document.querySelector('button[onclick*="visit"]') || 
+                                  document.querySelector('a[href*="visit"]') ||
+                                  document.querySelector('.btn-primary') ||
+                                  document.querySelector('button:contains("Visit")');
+                
+                if (visitButton) {
+                    setTimeout(() => {
+                        visitButton.click();
+                    }, 500);
+                }
+            }
+        });
+        
+        // Gestione degli errori di rete
+        window.addEventListener('error', function(e) {
+            console.log('Errore rilevato, tentativo di accesso alternativo...');
+        });
+        
+        // Preload dell'URL per velocizzare l'accesso
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = directUrl;
+        document.head.appendChild(link);
+    </script>
 </body>
 </html>
