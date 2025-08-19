@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppFerie - Accesso Applicazione</title>
+    
+    <!-- Meta tag per controllo cache - SOLUZIONE A -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="Tue, 19 Aug 2025 08:39:09 GMT">
+    
+    <!-- Auto-refresh ogni 30 secondi -->
+    <meta http-equiv="refresh" content="30">
+    
+    <title>AppFerie - Accesso Applicazione (1755592749690)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -103,13 +113,43 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
         }
+        .cache-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #856404;
+        }
+        .refresh-notice {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
+    <div class="refresh-notice">
+        🔄 Auto-refresh: 30s
+    </div>
+    
     <div class="container">
         <div class="logo">AF</div>
         <h1>AppFerie</h1>
         <p class="subtitle">Sistema di Gestione Ferie - IPSIA Apri</p>
+        
+        <div class="cache-info">
+            <strong>📅 Timestamp:</strong> 1755592749690<br>
+            <strong>🕒 Generato:</strong> 19/08/2025, 10:39:09<br>
+            <strong>🔄 Auto-refresh:</strong> Ogni 30 secondi
+        </div>
         
         <div class="developer-info">
             <h3>👨‍💻 Informazioni Sviluppatore</h3>
@@ -117,26 +157,27 @@
             <p><strong>Email:</strong> alessandro.gaspari@gmail.com</p>
         </div>
         
-        <a href="https://4c1ab9f83d0c.ngrok-free.app" class="access-button" target="_blank">
+        <a href="https://758c502dcaa1.ngrok-free.app" class="access-button" target="_blank">
             🚀 Accedi all'Applicazione
         </a>
         
-        <div class="url-display">https://4c1ab9f83d0c.ngrok-free.app</div>
+        <div class="url-display">https://758c502dcaa1.ngrok-free.app</div>
         
         <button class="copy-button" onclick="copyUrl()">📋 Copia URL</button>
         
         <div class="info-section">
             <h3>📋 Informazioni Applicazione</h3>
             <p><strong>Versione:</strong> 2.0</p>
-            <p><strong>Ultimo aggiornamento:</strong> 19/08/2025, 00:06:53</p>
+            <p><strong>Ultimo aggiornamento:</strong> 19/08/2025, 10:39:09</p>
             <p><strong>Stato:</strong> Attivo</p>
             <p><strong>Porta:</strong> 3000</p>
+            <p><strong>Cache Busting:</strong> Attivo (1755592749690)</p>
         </div>
     </div>
 
     <script>
         function copyUrl() {
-            const url = 'https://4c1ab9f83d0c.ngrok-free.app';
+            const url = 'https://758c502dcaa1.ngrok-free.app';
             navigator.clipboard.writeText(url).then(() => {
                 const btn = event.target;
                 const originalText = btn.textContent;
@@ -148,6 +189,16 @@
                 }, 2000);
             });
         }
+        
+        // Notifica visiva di aggiornamento
+        window.addEventListener('beforeunload', function() {
+            document.body.style.opacity = '0.5';
+        });
+        
+        // Debug info in console
+        console.log('AppFerie - Cache Busting Attivo');
+        console.log('Timestamp:', 1755592749690);
+        console.log('Generato:', '19/08/2025, 10:39:09');
     </script>
 </body>
 </html>
